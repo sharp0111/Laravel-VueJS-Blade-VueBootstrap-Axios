@@ -8,15 +8,36 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import VueRouter from 'vue-router';
 
+window.Vue.use(VueRouter);
+
+import SamplesIndex from './components/SamplesIndex.vue';
+import SamplesCreate from './components/SamplesCreate.vue';
+import SamplesEdit from './components/SamplesEdit.vue';
+
+const routes = [
+    {
+        path: '/',
+        components: {
+            samplesIndex: SamplesIndex
+        }
+    },
+    {path: '/samples/create', component: SamplesCreate, name: 'createSample'},
+    {path: '/samples/edit/:id', component: SamplesEdit, name: 'editSample'},
+]
+
+const router = new VueRouter({ routes })
+ 
+const app = new Vue({ router }).$mount('#app')
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-const app = new Vue({
-    el: '#app'
-});
+// const app = new Vue({
+//     el: '#app'
+// });
